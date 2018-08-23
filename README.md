@@ -3,6 +3,13 @@
 This is a jailsystem that uses IRL time to jail someone. If he return ingame before the time he will be put in jail again.
 
 This is the code you need to put in esx_policejob and integrate it in the menu you want:
+- 1 download the ressource
+- 2 put it in your ressource folder somewhere
+- 3 in server cfg add: start esx_jb_realtimejailer
+- 4 add the code below in police client file 
+- 5a trigger somewhere in your menus : openJailMenu(GetPlayerServerId(player))  -->olderversion of policejob where player is a variable of your player
+- 5b trigger somewhere in your menus : openJailMenu(GetPlayerServerId(closestplayer))  -->newer version of policejob where closestplayer is a variable of your player
+- 6 done !
 
 ```
 
@@ -50,5 +57,12 @@ function openJailMenu(playerid)
 	  menu.close()
 	end
   )
+end
+
+function UnblockMenuInput()
+    Citizen.CreateThread( function()
+        Citizen.Wait( 150 )
+        blockinput = false 
+    end )
 end
 ```
